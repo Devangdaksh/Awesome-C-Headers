@@ -22,7 +22,7 @@ There are three main kinds:
 
 ## 🗂 Standard C Header Files Timeline
 
-| Standard / Year | Headers Introduced | Committee | History |
+| Standard / Year | Headers Introduced | Committee | Notes |
 |-----------------|-------------------|-----------|---------|
 | **C89 / ANSI C (1989)** | `<assert.h>`, `<ctype.h>`, `<errno.h>`, `<float.h>`, `<limits.h>`, `<locale.h>`, `<math.h>`, `<setjmp.h>`, `<signal.h>`, `<stdarg.h>`, `<stddef.h>`, `<stdio.h>`, `<stdlib.h>`, `<string.h>`, `<time.h>` | ANSI X3J11 | The ANSI C (C89) header files were introduced as part of the formal standardization of the C programming language in 1989 by the ANSI X3J11 committee, shaping portability and the future of C development. Below is a detailed historical overview of their origin, committee process, timeline, and impact. |
 | **C95 (Amendment 1)** | `<iso646.h>`, `<wchar.h>`, `<wctype.h>` | ISO/IEC WG14 | C95 (Amendment 1, 1995), developed by ISO/IEC WG14, enhanced the C standard by introducing <iso646.h> for alternative operators and <wchar.h>, <wctype.h> for improved multi-byte and wide character support, reflecting the committee's commitment to error correction and internationalization. |
