@@ -58,6 +58,349 @@ These headers are not part of the ISO C standard. They’re provided by operatin
 …and many more for specific libraries.
 
 ---
+Here's a cross-platform availability summary for common C headers, using your suggested symbols and notes:
+
+| Header       | Cross-Platform | Notes                             |
+|--------------|----------------|----------------------------------|
+| `<stdlib.h>` | 🟢 Yes         | Standard C, available everywhere |
+| `<stdio.h>`  | 🟢 Yes         | Standard C, available everywhere |
+| `<string.h>` | 🟢 Yes         | Standard C, available everywhere |
+| `<stddef.h>` | 🟢 Yes         | Standard C, available everywhere |
+| `<stdint.h>` | 🟢 Yes         | Standard C, available everywhere |
+| `<stdbool.h>`| 🟢 Yes         | Standard C99, available everywhere |
+| `<math.h>`   | 🟢 Yes         | Standard C, available everywhere |
+| `<time.h>`   | 🟢 Yes         | Standard C, available everywhere |
+| `<assert.h>` | 🟢 Yes         | Standard C, available everywhere |
+| `<errno.h>`  | 🟢 Yes         | Standard C, available everywhere |
+| `<ctype.h>`  | 🟢 Yes         | Standard C, available everywhere |
+| `<locale.h>` | 🟢 Yes         | Standard C, available everywhere |
+| `<float.h>`  | 🟢 Yes         | Standard C, available everywhere |
+| `<setjmp.h>` | 🟢 Yes         | Standard C, available everywhere |
+| `<signal.h>` | 🟢 Yes         | Standard C, available everywhere |
+| `<fenv.h>`   | 🟢 Yes         | Standard C99, mostly available   |
+| `<uchar.h>`  | 🟢 Yes         | Standard C11, mostly available   |
+| `<stdatomic.h>` | 🟢 Yes      | Standard C11, mostly available   |
+| `<threads.h>` | 🟢 Yes        | Standard C11, mostly available   |
+| `<tgmath.h>` | 🟢 Yes         | Standard C99, available everywhere |
+| `<unistd.h>` | 🔴 No          | POSIX only (not available on Windows) |
+| `<sys/socket.h>` | 🔴 No       | POSIX/BSD/Linux only                  |
+| `<pthread.h>` | 🔴 No          | POSIX threads, POSIX only             |
+| `<ncurses.h>` | 🔴 No          | UNIX-like terminal UI library only    |
+| `<malloc.h>`  | 🟡 Limited    | Not standard, deprecated or OS-dependent |
+| `<conio.h>`   | 🔴 No          | Windows/DOS-only (Borland, MSVC)      |
+| `<windows.h>` | 🔴 No          | Windows SDK only                      |
+| `<dos.h>`     | 🔴 No          | DOS/Windows compilers only             |
+| `<graphics.h>`| 🔴 No          | Borland/Turbo C DOS graphics          |
+| `<gtk/gtk.h>` | 🔴 No          | GTK+ GUI library, cross-platform but primarily Linux/Mac/Windows with GTK installed |
+| `<curl/curl.h>`| 🟡 Limited    | Requires libcurl, platform-dependent but widely portable |
+| `<openssl/ssl.h>`| 🟡 Limited   | Platform-dependent (but widely portable) |
+| `<sqlite3.h>` | 🟢 Yes         | Cross-platform embedded DB library    |
+
+This notation helps clarify portability considerations when choosing headers for C projects across platforms.
+---
+## Standard C Header Examples (How to Extend for All Headers)
+
+Repeat this structure for every standard, non-standard, and library-specific header, keeping examples concise and focused on core functionality.
+
+- **Usage snippets**: Show the most common or representative API usage.
+- **Minimal test case**: Provide a short `main()` demonstrating successful compile/run.
+
+
+#### `<assert.h>`
+**Usage Snippet**
+```c
+#include <assert.h>
+assert(2 + 2 == 4); // Check assertion at runtime
+```
+**Minimal Test Case**
+```c
+#include <assert.h>
+int main() {
+    assert(5 > 3); // Program continues if true; aborts if false
+    return 0;
+}
+```
+
+
+#### `<stdio.h>`
+**Usage Snippet**
+```c
+#include <stdio.h>
+printf("Hello, C!\n"); // Output text to stdout
+```
+**Minimal Test Case**
+```c
+#include <stdio.h>
+int main() {
+    printf("Test Passed\n");
+    return 0;
+}
+```
+
+
+#### `<stdint.h>`
+**Usage Snippet**
+```c
+#include <stdint.h>
+int32_t num = 42; // Signed 32-bit integer
+```
+**Minimal Test Case**
+```c
+#include <stdint.h>
+#include <stdio.h>
+int main() {
+    uint8_t b = 255;
+    printf("%u\n", b); // Should print: 255
+    return 0;
+}
+```
+
+
+#### `<math.h>`
+**Usage Snippet**
+```c
+#include <math.h>
+double r = sqrt(25.0); // r is 5.0
+```
+**Minimal Test Case**
+```c
+#include <math.h>
+#include <stdio.h>
+int main() {
+    printf("%f\n", pow(2.0, 3.0)); // Should print: 8.000000
+    return 0;
+}
+```
+### `<stdlib.h>`
+**Usage Snippet**
+```c
+#include <stdlib.h>
+int *arr = malloc(sizeof(int) * 10); // Allocate array of 10 ints
+free(arr);
+```
+**Minimal Test Case**
+```c
+#include <stdlib.h>
+int main() {
+    int *p = calloc(1, sizeof(int));
+    free(p);
+    return 0;
+}
+```
+### `<string.h>`
+**Usage Snippet**
+```c
+#include <string.h>
+size_t len = strlen("Hello"); // Get length of string
+```
+**Minimal Test Case**
+```c
+#include <string.h>
+#include <stdio.h>
+int main() {
+    char s[5] = "abc";
+    strcpy(s, "def");
+    printf("%s\n", s); // Should print: def
+    return 0;
+}
+```
+### `<ctype.h>`
+**Usage Snippet**
+```c
+#include <ctype.h>
+int res = isdigit('8'); // Returns nonzero for digit char
+```
+**Minimal Test Case**
+```c
+#include <ctype.h>
+int main() {
+    return isalpha('A') ? 0 : 1; // Returns 0 for alphabetic
+}
+```
+
+### `<time.h>`
+**Usage Snippet**
+```c
+#include <time.h>
+time_t now = time(NULL); // Get current time
+```
+**Minimal Test Case**
+```c
+#include <time.h>
+#include <stdio.h>
+int main() {
+    printf("%ld\n", time(NULL)); // Print current Unix timestamp
+    return 0;
+}
+```
+### `<limits.h>`
+**Usage Snippet**
+```c
+#include <limits.h>
+int max = INT_MAX; // Maximum value for int
+```
+**Minimal Test Case**
+```c
+#include <limits.h>
+int main() {
+    return (CHAR_BIT == 8) ? 0 : 1; // Typical for most platforms
+}
+```
+
+### `<errno.h>`
+**Usage Snippet**
+```c
+#include <errno.h>
+errno = 0; // Set errno manually
+```
+**Minimal Test Case**
+```c
+#include <errno.h>
+#include <stdio.h>
+#include <math.h>
+int main() {
+    double r = sqrt(-1);
+    if (errno != 0)
+        printf("Error: %d\n", errno);
+    return 0;
+}
+```
+
+
+***
+
+### Non-Standard Example: `<conio.h>` (Borland/Turbo C)
+**Usage Snippet**
+```c
+#include <conio.h>
+getch(); // Get a character from keyboard
+```
+**Minimal Test Case**
+```c
+#include <conio.h>
+int main() {
+    clrscr(); // Clear screen
+    return 0;
+}
+```
+
+
+***
+
+### Non-Standard Example: `<unistd.h>` (POSIX)
+**Usage Snippet**
+```c
+#include <unistd.h>
+sleep(1); // Pause for 1 second
+```
+**Minimal Test Case**
+```c
+#include <unistd.h>
+int main() {
+    return (isatty(0) ? 0 : 1); // Check if stdin is a terminal
+}
+```
+
+### `<locale.h>`
+**Usage Snippet**
+```c
+#include <locale.h>
+setlocale(LC_ALL, ""); // Use environment's locale settings
+```
+**Minimal Test Case**
+```c
+#include <locale.h>
+#include <stdio.h>
+int main() {
+    setlocale(LC_ALL, "");
+    printf("Locale set\n");
+    return 0;
+}
+```
+### `<float.h>`
+**Usage Snippet**
+```c
+#include <float.h>
+double d = DBL_MAX; // Largest double value
+```
+**Minimal Test Case**
+```c
+#include <float.h>
+#include <stdio.h>
+int main() {
+    printf("%e\n", DBL_MIN); // Print smallest positive double
+    return 0;
+}
+```
+### `<setjmp.h>`
+**Usage Snippet**
+```c
+#include <setjmp.h>
+jmp_buf buf;
+if (setjmp(buf)) { /* handle jump */ }
+```
+**Minimal Test Case**
+```c
+#include <setjmp.h>
+#include <stdio.h>
+jmp_buf buf;
+void jump() { longjmp(buf, 42); }
+int main() {
+    if (setjmp(buf) == 0) {
+        jump();
+    } else {
+        printf("Jumped!\n");
+    }
+    return 0;
+}
+```
+### `<signal.h>`
+**Usage Snippet**
+```c
+#include <signal.h>
+signal(SIGINT, SIG_IGN); // Ignore Ctrl+C
+```
+**Minimal Test Case**
+```c
+#include <signal.h>
+#include <stdio.h>
+int main() {
+    signal(SIGINT, SIG_IGN);
+    printf("SIGINT ignored\n");
+    return 0;
+}
+```
+
+### `<sys/socket.h>` (POSIX)
+**Usage Snippet**
+```c
+#include <sys/socket.h>
+int sock = socket(AF_INET, SOCK_STREAM, 0);
+```
+**Minimal Test Case**
+```c
+#include <sys/socket.h>
+int main() {
+    int s = socket(AF_INET, SOCK_STREAM, 0);
+    return (s < 0 ? 1 : 0);
+}
+```
+### `<pthread.h>` (POSIX)
+**Usage Snippet**
+```c
+#include <pthread.h>
+pthread_t tid;
+pthread_create(&tid, NULL, thread_fn, NULL);
+```
+**Minimal Test Case**
+```c
+#include <pthread.h>
+void *thread_fn(void *arg) { return NULL; }
+int main() {
+    pthread_t tid;
+    return pthread_create(&tid, NULL, thread_fn, NULL);
+}
+```
 
 ## 🗂 User-Defined Headers
 
