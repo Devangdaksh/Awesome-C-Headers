@@ -1,4 +1,4 @@
-# c-library-headers
+# Awesome-C-Headers
 Emphasises both standard and non-standard C library headers.
 
 # 📚 C Header Files Guide
